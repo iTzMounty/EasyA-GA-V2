@@ -22,7 +22,6 @@ const CreateEvent = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const user = getCurrentUser();
     if (!user) {
       alert('Please sign in to create an event');
@@ -60,10 +59,9 @@ const CreateEvent = () => {
       case 1:
         return (
           <div className="space-y-6">
+            {/* Step 1: Basic Info */}
             <div>
-              <label htmlFor="title" className="block text-xl font-semibold text-gray-900 mb-2">
-                What's your event called?
-              </label>
+              <label htmlFor="title" className="block text-xl font-semibold text-gray-900 mb-2">What's your event called?</label>
               <input
                 type="text"
                 id="title"
@@ -77,9 +75,7 @@ const CreateEvent = () => {
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-xl font-semibold text-gray-900 mb-2">
-                Tell people what your event is about
-              </label>
+              <label htmlFor="description" className="block text-xl font-semibold text-gray-900 mb-2">Tell people what your event is about</label>
               <textarea
                 id="description"
                 name="description"
@@ -87,15 +83,13 @@ const CreateEvent = () => {
                 onChange={handleChange}
                 rows={5}
                 className="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#4D61FC] focus:border-transparent"
-                placeholder="Describe what attendees can expect from your event..."
+                placeholder="Describe what attendees can expect..."
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="imageUrl" className="block text-xl font-semibold text-gray-900 mb-2">
-                Add a cover image
-              </label>
+              <label htmlFor="imageUrl" className="block text-xl font-semibold text-gray-900 mb-2">Add a cover image</label>
               <div className="relative">
                 <input
                   type="url"
@@ -108,18 +102,17 @@ const CreateEvent = () => {
                 />
                 <ImageIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
               </div>
-              <p className="mt-2 text-sm text-gray-500">Tip: Use a high-quality image that represents your event</p>
+              <p className="mt-2 text-sm text-gray-500">Tip: Use a high-quality image.</p>
             </div>
           </div>
         );
       case 2:
         return (
           <div className="space-y-6">
+            {/* Step 2: Date & Location */}
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <label htmlFor="date" className="block text-xl font-semibold text-gray-900 mb-2">
-                  When is it happening?
-                </label>
+                <label htmlFor="date" className="block text-xl font-semibold text-gray-900 mb-2">When is it happening?</label>
                 <input
                   type="date"
                   id="date"
@@ -131,9 +124,7 @@ const CreateEvent = () => {
                 />
               </div>
               <div>
-                <label htmlFor="time" className="block text-xl font-semibold text-gray-900 mb-2">
-                  What time?
-                </label>
+                <label htmlFor="time" className="block text-xl font-semibold text-gray-900 mb-2">What time?</label>
                 <input
                   type="time"
                   id="time"
@@ -147,22 +138,7 @@ const CreateEvent = () => {
             </div>
 
             <div>
-              <label className="block text-xl font-semibold text-gray-900 mb-2">
-                Where is it happening?
-              </label>
-              <div className="bg-gray-50 p-4 rounded-xl mb-4">
-                <label className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    id="isOnline"
-                    name="isOnline"
-                    checked={formData.isOnline}
-                    onChange={handleChange}
-                    className="w-5 h-5 text-[#4D61FC] rounded focus:ring-[#4D61FC]"
-                  />
-                  <span className="text-lg text-gray-700">This is an online event</span>
-                </label>
-              </div>
+              <label className="block text-xl font-semibold text-gray-900 mb-2">Where is it happening?</label>
               <div className="relative">
                 <input
                   type="text"
@@ -182,60 +158,35 @@ const CreateEvent = () => {
       case 3:
         return (
           <div className="space-y-6">
+            {/* Step 3: Tickets */}
             <div>
-              <label htmlFor="maxAttendees" className="block text-xl font-semibold text-gray-900 mb-2">
-                How many people can attend?
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  id="maxAttendees"
-                  name="maxAttendees"
-                  value={formData.maxAttendees}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#4D61FC] focus:border-transparent pl-12"
-                  placeholder="Enter maximum capacity"
-                  min="1"
-                  required
-                />
-                <Users className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              </div>
+              <label htmlFor="maxAttendees" className="block text-xl font-semibold text-gray-900 mb-2">How many people can attend?</label>
+              <input
+                type="number"
+                id="maxAttendees"
+                name="maxAttendees"
+                value={formData.maxAttendees}
+                onChange={handleChange}
+                className="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#4D61FC] focus:border-transparent"
+                min="1"
+                required
+              />
+              <Users className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
             </div>
 
             <div>
-              <label className="block text-xl font-semibold text-gray-900 mb-2">
-                Ticket Information
-              </label>
-              <div className="bg-gray-50 p-4 rounded-xl mb-4">
-                <label className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    id="isTicketed"
-                    name="isTicketed"
-                    checked={formData.isTicketed}
-                    onChange={handleChange}
-                    className="w-5 h-5 text-[#4D61FC] rounded focus:ring-[#4D61FC]"
-                  />
-                  <span className="text-lg text-gray-700">This is a paid event</span>
-                </label>
-              </div>
-              {formData.isTicketed && (
-                <div className="relative">
-                  <input
-                    type="number"
-                    id="ticketPrice"
-                    name="ticketPrice"
-                    value={formData.ticketPrice}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#4D61FC] focus:border-transparent pl-12"
-                    placeholder="Enter ticket price"
-                    min="0"
-                    step="0.01"
-                    required
-                  />
-                  <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">£</span>
-                </div>
-              )}
+              <label className="block text-xl font-semibold text-gray-900 mb-2">Ticket Information</label>
+              <input
+                type="number"
+                id="ticketPrice"
+                name="ticketPrice"
+                value={formData.ticketPrice}
+                onChange={handleChange}
+                className="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#4D61FC] focus:border-transparent"
+                placeholder="Ticket price"
+                min="0"
+                step="0.01"
+              />
             </div>
           </div>
         );
@@ -256,18 +207,16 @@ const CreateEvent = () => {
           <div className="flex items-center justify-between mb-8 border-b pb-8">
             <h1 className="text-3xl font-bold text-gray-900">Create an Event</h1>
             <div className="flex space-x-2">
-              {steps.map((s) => (
+              {steps.map((step) => (
                 <button
-                  key={s.number}
-                  onClick={() => setStep(s.number)}
+                  key={step.number}
+                  onClick={() => setStep(step.number)}
                   className={`flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    step === s.number
-                      ? 'bg-[#4D61FC] text-white'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    step.number === step ? 'bg-[#4D61FC] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
-                  <s.icon className="w-4 h-4 mr-2" />
-                  {s.title}
+                  <step.icon className="w-4 h-4 mr-2" />
+                  {step.title}
                 </button>
               ))}
             </div>
@@ -313,5 +262,3 @@ const CreateEvent = () => {
 };
 
 export default CreateEvent;
-
-export default CreateEvent
