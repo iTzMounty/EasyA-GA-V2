@@ -1,3 +1,4 @@
+// Final fix before upload
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, MapPin, Users, Image as ImageIcon, Info, Ticket } from 'lucide-react';
